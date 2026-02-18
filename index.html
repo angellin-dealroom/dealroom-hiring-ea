@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dealroom Media — Executive Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000000;
+    --bg-input: #0a0a0a;
+    --border: #222;
+    --border-hover: #444;
+    --text: #ffffff;
+    --text-sec: #e0e0e0;
+    --text-muted: #aaa;
+    --red: #ff3b30;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-weight:800; font-size:18px; letter-spacing:-0.3px; }
+  .nav-tag {
+    font-size:11px; font-weight:700; text-transform:uppercase;
+    letter-spacing:1.5px; border:1px solid var(--border-hover);
+    padding:6px 14px; border-radius:100px;
+  }
+
+  .hero {
+    padding: 160px 40px 80px;
+    max-width: 800px; margin: 0 auto; text-align: center;
+  }
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 7vw, 80px);
+    line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 24px;
+  }
+  .hero-sub {
+    font-size:16px; color:var(--text-sec); font-weight:600;
+    max-width:520px; margin:0 auto 20px; line-height:1.7;
+  }
+  .salary-tag {
+    display:inline-block; font-size:14px; font-weight:700;
+    border:1px solid var(--border-hover);
+    padding:8px 20px; border-radius:100px; margin-top:4px;
+  }
+
+  .main { max-width:720px; margin:0 auto; padding:0 40px 100px; }
+  .divider { width:100%; height:1px; background:var(--border); margin:0 0 48px; }
+
+  .job-description { margin-bottom:64px; }
+  .section-label {
+    font-size:11px; font-weight:700; text-transform:uppercase;
+    letter-spacing:2px; color:var(--text-muted); margin-bottom:32px;
+  }
+  .job-description p { color:var(--text-sec); font-size:15px; line-height:1.8; margin-bottom:20px; font-weight:600; }
+  .job-description h3 {
+    font-family:'Instrument Serif',serif; font-weight:400;
+    font-size:24px; margin:40px 0 16px; letter-spacing:-0.3px;
+  }
+  .job-description ul { list-style:none; padding:0; margin-bottom:20px; }
+  .job-description li {
+    color:var(--text-sec); font-size:15px; line-height:1.8; font-weight:600;
+    padding-left:20px; position:relative; margin-bottom:4px;
+  }
+  .job-description li::before {
+    content:'—'; position:absolute; left:0; color:var(--text-sec);
+  }
+  .cta-line {
+    color:var(--text)!important; font-weight:800; font-size:15px;
+    margin-top:32px; padding-top:28px; border-top:1px solid var(--border);
+  }
+  .easter-egg { color:var(--text-sec); font-style:italic; font-size:14px; margin-top:10px; font-weight:600; }
+
+  .form-area { padding:40px; background:#0d0d0d; border:1px solid #1a1a1a; border-radius:12px; }
+  .form-grid {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:24px; margin-bottom:24px;
+  }
+  .form-group { display:flex; flex-direction:column; gap:8px; }
+  .form-group.full-width { grid-column:1/-1; }
+  .form-group label { font-size:13px; font-weight:700; color:var(--text-sec); }
+  .form-group label .req { color:var(--text-sec); }
+  .form-group input,
+  .form-group select {
+    background:#141414; border:1px solid #2a2a2a;
+    border-radius:8px; padding:13px 16px; color:var(--text);
+    font-family:'Inter',sans-serif; font-size:15px; font-weight:600;
+    transition:border-color 0.2s; outline:none; width:100%;
+  }
+  .form-group input::placeholder { color:#666; }
+  .form-group input:focus,
+  .form-group select:focus { border-color:#555; }
+  .form-group input.error,
+  .form-group select.error { border-color:var(--red); }
+  .form-group .error-msg {
+    font-size:12px; color:var(--red); display:none; margin-top:-2px;
+  }
+  .form-group .error-msg.visible { display:block; }
+  .form-group select {
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23555' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 14px center;
+    padding-right:40px; cursor:pointer;
+  }
+  .form-group select option { background:#141414; color:var(--text); }
+
+  .file-upload-area {
+    border:1px dashed #333; border-radius:8px;
+    padding:28px; text-align:center; cursor:pointer;
+    transition:border-color 0.2s; background:#141414;
+  }
+  .file-upload-area:hover { border-color:#555; }
+  .file-upload-area.dragover { border-color:#666; background:#1a1a1a; }
+  .file-upload-area.has-file { border-color:var(--text-muted); border-style:solid; }
+  .file-upload-area.error { border-color:var(--red); }
+  .upload-text { font-size:14px; color:var(--text-sec); font-weight:600; }
+  .upload-text strong { color:var(--text); font-weight:800; }
+  .upload-hint { font-size:12px; color:var(--text-muted); margin-top:6px; font-weight:600; }
+  .file-name { font-size:14px; color:var(--text); font-weight:700; }
+  #resumeInput { display:none; }
+
+  .submit-area {
+    margin-top:36px; display:flex; flex-direction:column;
+    align-items:center; gap:14px;
+  }
+  .submit-btn {
+    width:100%; padding:16px 40px;
+    background:var(--text); color:var(--bg);
+    font-family:'Inter',sans-serif; font-size:15px; font-weight:800;
+    border:none; border-radius:8px; cursor:pointer; transition:opacity 0.2s;
+  }
+  .submit-btn:hover { opacity:0.85; }
+  .submit-btn:disabled { opacity:0.4; cursor:not-allowed; }
+  .submit-btn .spinner {
+    display:none; width:18px; height:18px;
+    border:2px solid rgba(0,0,0,0.2); border-top-color:#000;
+    border-radius:50%; animation:spin 0.6s linear infinite; margin:0 auto;
+  }
+  .submit-btn.loading .btn-text { display:none; }
+  .submit-btn.loading .spinner { display:block; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .form-note { font-size:12px; color:var(--text-muted); text-align:center; font-weight:600; }
+
+  .success-message { display:none; text-align:center; padding:60px 20px; }
+  .success-message.visible { display:block; animation:fadeIn 0.5s ease; }
+  .success-message h2 {
+    font-family:'Instrument Serif',serif;
+    font-size:32px; font-weight:400; margin-bottom:12px;
+  }
+  .success-message p { color:var(--text-sec); font-size:15px; line-height:1.7; font-weight:600; }
+
+  .error-banner {
+    display:none; border:1px solid rgba(255,59,48,0.25);
+    border-radius:8px; padding:12px 18px; margin-bottom:24px;
+    color:var(--red); font-size:14px; font-weight:700;
+    text-align:center; background:rgba(255,59,48,0.06);
+  }
+  .error-banner.visible { display:block; animation:shake 0.35s ease; }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)}
+  }
+  @keyframes fadeIn {
+    from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)}
+  }
+
+  footer {
+    text-align:center; padding:40px; border-top:1px solid var(--border);
+    font-size:13px; color:var(--text-muted); font-weight:600;
+  }
+  footer a { color:var(--text-sec); text-decoration:none; }
+  footer a:hover { color:var(--text); }
+
+  @media(max-width:640px){
+    nav{padding:16px 20px}
+    .hero{padding:120px 20px 60px}
+    .main{padding:0 20px 80px}
+    .form-grid{grid-template-columns:1fr;gap:18px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Dealroom Media</div>
+  <div class="nav-tag">We're Hiring</div>
+</nav>
+
+<section class="hero">
+  <h1>Executive Assistant</h1>
+  <p class="hero-sub">Help our CEO scale Dealroom Media from the ground up. Build systems, manage operations, and keep everything running while we grow fast.</p>
+  <div class="salary-tag">$55,000 – $70,000 · Depending on Experience</div>
+</section>
+
+<div class="main">
+
+  <div class="divider"></div>
+
+  <div class="job-description">
+    <div class="section-label">About the Role</div>
+    <p>Dealroom Media is looking for an Executive Assistant to help our 20 y/o CEO scale the business — building SOPs, managing operations, and making sure everything runs smoothly while we grow fast.</p>
+    <p>Here's the deal: We're not your typical content agency. At Dealroom Media, we build organic content engines that drive demand. We help founders, startups, and VCs own their narrative, get noticed, and become the loudest voice in the room.</p>
+    <p>We've worked with clients backed by Sequoia, Jason Calacanis, Marc Benioff, Kevin Durant, and more. Now we need someone who can build the systems and processes that'll help us scale without breaking.</p>
+
+    <h3>What you'll do</h3>
+    <ul>
+      <li>Build SOPs and operating procedures that actually work</li>
+      <li>Manage the CEO's calendar, inbox, and day-to-day priorities</li>
+      <li>Handle special projects and anything else that needs to get done</li>
+      <li>Work directly with the CEO on strategic initiatives</li>
+      <li>Write content when needed (everyone here writes)</li>
+      <li>Keep the trains running on time while we move fast</li>
+    </ul>
+
+    <h3>What we're looking for</h3>
+    <ul>
+      <li>Someone who loves building systems and getting things organized</li>
+      <li>Experience managing up and working with executives</li>
+      <li>Strong writer who can communicate clearly with clients and team</li>
+      <li>Passionate about startups, venture capital, and media</li>
+      <li>Hungry to own real responsibility from day one</li>
+    </ul>
+
+    <h3>What's in it for you</h3>
+    <ul>
+      <li>Work directly with the CEO and see how decisions get made</li>
+      <li>Build the operating foundation for a high-growth company</li>
+      <li>Exposure to top-tier founders, operators, and investors</li>
+    </ul>
+
+    <p class="cta-line">Think you're a fit? Show us what you've got.</p>
+    <p class="easter-egg">If you read this all the way, send me a message on LinkedIn with something interesting about you.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="form-area" id="formCard">
+    <div class="section-label">Apply</div>
+    <div class="error-banner" id="errorBanner">Please fill out all required fields before submitting.</div>
+
+    <div id="formContent">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>First Name <span class="req">*</span></label>
+          <input type="text" id="firstName" placeholder="Jane">
+          <span class="error-msg" id="firstNameError">Required</span>
+        </div>
+        <div class="form-group">
+          <label>Last Name <span class="req">*</span></label>
+          <input type="text" id="lastName" placeholder="Doe">
+          <span class="error-msg" id="lastNameError">Required</span>
+        </div>
+        <div class="form-group full-width">
+          <label>Preferred Name <span class="req">*</span></label>
+          <input type="text" id="preferredName" placeholder="What should we call you?">
+          <span class="error-msg" id="preferredNameError">Required</span>
+        </div>
+        <div class="form-group">
+          <label>Years of Work Experience <span class="req">*</span></label>
+          <select id="yearsExperience">
+            <option value="" disabled selected>Select</option>
+            <option value="0-1">0 – 1 years</option>
+            <option value="1-3">1 – 3 years</option>
+            <option value="3-5">3 – 5 years</option>
+            <option value="5-10">5 – 10 years</option>
+            <option value="10+">10+ years</option>
+          </select>
+          <span class="error-msg" id="yearsExperienceError">Required</span>
+        </div>
+        <div class="form-group">
+          <label>EA / Similar Role Experience <span class="req">*</span></label>
+          <select id="eaExperience">
+            <option value="" disabled selected>Select</option>
+            <option value="None">None</option>
+            <option value="Less than 1 year">Less than 1 year</option>
+            <option value="1-2 years">1 – 2 years</option>
+            <option value="2-5 years">2 – 5 years</option>
+            <option value="5+ years">5+ years</option>
+          </select>
+          <span class="error-msg" id="eaExperienceError">Required</span>
+        </div>
+        <div class="form-group full-width">
+          <label>Do you currently live in NYC? <span class="req">*</span></label>
+          <select id="livesInNYC">
+            <option value="" disabled selected>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No, but willing to relocate">No, but willing to relocate</option>
+            <option value="No">No</option>
+          </select>
+          <span class="error-msg" id="livesInNYCError">Required</span>
+        </div>
+        <div class="form-group full-width">
+          <label>LinkedIn Profile URL <span class="req">*</span></label>
+          <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+          <span class="error-msg" id="linkedinError">Required</span>
+        </div>
+        <div class="form-group full-width">
+          <label>Resume <span class="req">*</span></label>
+          <div class="file-upload-area" id="uploadArea" onclick="document.getElementById('resumeInput').click()">
+            <div class="upload-text"><strong>Click to upload</strong> or drag and drop</div>
+            <div class="upload-hint">PDF, DOC, or DOCX — Max 5MB</div>
+          </div>
+          <input type="file" id="resumeInput" accept=".pdf,.doc,.docx">
+          <span class="error-msg" id="resumeError">Please upload your resume</span>
+        </div>
+      </div>
+
+      <div class="submit-area">
+        <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+          <span class="btn-text">Submit Application</span>
+          <div class="spinner"></div>
+        </button>
+        <p class="form-note">All fields are required.</p>
+      </div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+      <h2>Application Received</h2>
+      <p>Thanks for applying. We'll review your submission and get back to you soon.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>© 2025 Dealroom Media — <a href="https://dealroom.media" target="_blank">dealroom.media</a></footer>
+
+<script>
+// GOOGLE SHEETS: Paste your Apps Script Web App URL below.
+// See instructions in the previous version's comments for setup.
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4UttbsrRV1Cz3SnOkIE4DUJVATVrPeTIxvKV1_OY3FT50kVM81tQ2ficdtOz10Cy3/exec';
+
+const uploadArea = document.getElementById('uploadArea');
+const resumeInput = document.getElementById('resumeInput');
+let selectedFile = null;
+
+resumeInput.addEventListener('change', function(e) {
+  if (e.target.files.length > 0) {
+    selectedFile = e.target.files[0];
+    if (selectedFile.size > 5*1024*1024) { alert('File must be under 5MB'); selectedFile = null; return; }
+    uploadArea.innerHTML = '<div class="file-name">✓ ' + selectedFile.name + '</div>';
+    uploadArea.classList.add('has-file');
+    uploadArea.classList.remove('error');
+  }
+});
+uploadArea.addEventListener('dragover', function(e) { e.preventDefault(); uploadArea.classList.add('dragover'); });
+uploadArea.addEventListener('dragleave', function() { uploadArea.classList.remove('dragover'); });
+uploadArea.addEventListener('drop', function(e) {
+  e.preventDefault(); uploadArea.classList.remove('dragover');
+  if (e.dataTransfer.files.length > 0) { resumeInput.files = e.dataTransfer.files; resumeInput.dispatchEvent(new Event('change')); }
+});
+
+function validateForm() {
+  const fields = [
+    {id:'firstName',errorId:'firstNameError'},{id:'lastName',errorId:'lastNameError'},
+    {id:'preferredName',errorId:'preferredNameError'},{id:'yearsExperience',errorId:'yearsExperienceError'},
+    {id:'eaExperience',errorId:'eaExperienceError'},{id:'livesInNYC',errorId:'livesInNYCError'},
+    {id:'linkedin',errorId:'linkedinError'},
+  ];
+  let valid = true;
+  fields.forEach(f => {
+    const el = document.getElementById(f.id), err = document.getElementById(f.errorId);
+    if (!el.value.trim()) { el.classList.add('error'); err.classList.add('visible'); valid = false; }
+    else { el.classList.remove('error'); err.classList.remove('visible'); }
+  });
+  const rErr = document.getElementById('resumeError');
+  if (!selectedFile) { uploadArea.classList.add('error'); rErr.classList.add('visible'); valid = false; }
+  else { uploadArea.classList.remove('error'); rErr.classList.remove('visible'); }
+  return valid;
+}
+
+async function handleSubmit() {
+  const banner = document.getElementById('errorBanner');
+  banner.classList.remove('visible');
+  if (!validateForm()) { banner.classList.add('visible'); banner.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('loading'); btn.disabled = true;
+
+  // Convert resume to base64
+  let resumeBase64 = '';
+  let resumeName = 'N/A';
+  let resumeType = '';
+  if (selectedFile) {
+    resumeName = selectedFile.name;
+    resumeType = selectedFile.type;
+    resumeBase64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = () => reject('File read error');
+      reader.readAsDataURL(selectedFile);
+    });
+  }
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    firstName: document.getElementById('firstName').value.trim(),
+    lastName: document.getElementById('lastName').value.trim(),
+    preferredName: document.getElementById('preferredName').value.trim(),
+    yearsExperience: document.getElementById('yearsExperience').value,
+    eaExperience: document.getElementById('eaExperience').value,
+    livesInNYC: document.getElementById('livesInNYC').value,
+    linkedin: document.getElementById('linkedin').value.trim(),
+    resumeFilename: resumeName,
+    resumeBase64: resumeBase64,
+    resumeType: resumeType
+  };
+
+  if (GOOGLE_SCRIPT_URL) {
+    try { await fetch(GOOGLE_SCRIPT_URL, {method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)}); }
+    catch(err) { console.error('Submission error:', err); }
+  } else { console.log('No Google Script URL. Data:', payload); }
+  document.getElementById('formContent').style.display = 'none';
+  document.getElementById('successMessage').classList.add('visible');
+  document.getElementById('formCard').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('input', function() {
+    this.classList.remove('error');
+    const err = document.getElementById(this.id+'Error');
+    if (err) err.classList.remove('visible');
+  });
+});
+</script>
+</body>
+</html>
