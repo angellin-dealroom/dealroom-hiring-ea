@@ -275,6 +275,16 @@
           <span class="error-msg" id="preferredNameError">Required</span>
         </div>
         <div class="form-group">
+          <label>Email <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="jane@example.com">
+          <span class="error-msg" id="emailError">Required</span>
+        </div>
+        <div class="form-group">
+          <label>Phone Number <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="(555) 123-4567">
+          <span class="error-msg" id="phoneError">Required</span>
+        </div>
+        <div class="form-group">
           <label>Years of Work Experience <span class="req">*</span></label>
           <select id="yearsExperience">
             <option value="" disabled selected>Select</option>
@@ -371,7 +381,8 @@ uploadArea.addEventListener('drop', function(e) {
 function validateForm() {
   const fields = [
     {id:'firstName',errorId:'firstNameError'},{id:'lastName',errorId:'lastNameError'},
-    {id:'preferredName',errorId:'preferredNameError'},{id:'yearsExperience',errorId:'yearsExperienceError'},
+    {id:'preferredName',errorId:'preferredNameError'},{id:'email',errorId:'emailError'},
+    {id:'phone',errorId:'phoneError'},{id:'yearsExperience',errorId:'yearsExperienceError'},
     {id:'eaExperience',errorId:'eaExperienceError'},{id:'livesInNYC',errorId:'livesInNYCError'},
     {id:'linkedin',errorId:'linkedinError'},
   ];
@@ -414,6 +425,8 @@ async function handleSubmit() {
     firstName: document.getElementById('firstName').value.trim(),
     lastName: document.getElementById('lastName').value.trim(),
     preferredName: document.getElementById('preferredName').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
     yearsExperience: document.getElementById('yearsExperience').value,
     eaExperience: document.getElementById('eaExperience').value,
     livesInNYC: document.getElementById('livesInNYC').value,
